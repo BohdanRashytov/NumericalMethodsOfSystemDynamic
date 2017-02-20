@@ -6,10 +6,10 @@ import nmsd1.Graph._
 object Common {
   // function
   val alpha = 1
-  val a = 1
-  val A = 1
-  val k1 = 1
-  val k2 = 1
+  val a = 1.0
+  val A = 1.0
+  val k1 = 1.0
+  val k2 = 1.0
 
   // x and y
   val N = 10
@@ -21,7 +21,7 @@ object Common {
   val hy = l2 / N
 
   // time
-  val M = 100
+  val M = 1000
   val tau = 1.0 / M
 
   // List[Double]
@@ -118,6 +118,6 @@ object Common {
       graph1 = graph1.+(t -> list1)
       graph2 = graph2.+(t -> list2)
     })
-    (addInitialConditions(graph1), addInitialConditions(graph2))
+    (graph1, graph2)
   }
 }

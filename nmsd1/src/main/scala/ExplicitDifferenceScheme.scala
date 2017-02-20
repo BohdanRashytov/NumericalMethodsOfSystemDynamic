@@ -9,7 +9,7 @@ object ExplicitDifferenceScheme {
       var tempMap: Map[(Int, Int), Double] = Map()
       for (k <- 1 to N - 1; m <- 1 to N - 1) {
         tempMap = tempMap.+((k, m) ->
-          (f(k, m, t - 1) +
+          tau * (f(k, m, t - 1) +
             v(t - 1)(k, m) / tau -
             alpha * (
               (v(t - 1)((k - 1), m) - 2 * v(t - 1)(k, m) + v(t - 1)((k + 1), m)) / (hx * hx) +

@@ -22,10 +22,9 @@ object Graph {
   frameError.setVisible(true)
   frameError.setContentPane(plotError)
 
-  val delay = 5000
+  val delay = 1000
 
   val resize = 1
-  //val resize = Long.MaxValue
 
   def paint(graph: (Map[Int, List[(Int, Int, Double)]], Map[Int, List[(Int, Int, Double)]]),
             error: Map[Int, Double]) = {
@@ -61,12 +60,4 @@ object Graph {
     plotError.removeAllPlots()
   }
 
-  def addInitialConditions(graph: Map[Int, List[(Int, Int, Double)]]): Map[Int, List[(Int, Int, Double)]] = {
-    var tempGraph: Map[Int, List[(Int, Int, Double)]] = graph
-    t.foreach(t => {
-      tempGraph = tempGraph.+(t ->
-        (initialConditions(t) ::: graph(t)))
-    })
-    tempGraph
-  }
 }
