@@ -23,9 +23,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: com.github.yannrichet:JMathArray:1.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.github.yannrichet:JMathIO:1.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.github.yannrichet:JMathPlot:1.0.1:jar" level="project" />
-    <orderEntry type="library" name="SBT: gov.nist.math:jama:1.0.3:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.10.6:jar" level="project" />
+    <orderEntry type="library" name="SBT: gov.nist.math:jama:1.0.3:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.github.yannrichet:JMathPlot:1.0.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.github.yannrichet:JMathIO:1.0:jar" level="project" />
   </component>
 </module>
