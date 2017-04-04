@@ -18,3 +18,8 @@ lazy val nmsd1 = (project in file ("nmsd1"))
 
 lazy val nmsd2 = (project in file ("nmsd2"))
 
+lazy val nmsd3 = (project in file ("nmsd3"))
+  .settings(
+    libraryDependencies += "com.github.yannrichet" % "JMathPlot" % "1.0.1" from "https://github.com/yannrichet/jmathplot/blob/master/dist/jmathplot.jar"
+  )
+
