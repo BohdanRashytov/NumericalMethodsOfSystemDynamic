@@ -9,16 +9,18 @@ object Common {
   val d = 1.0
 
   //сетка
-  val nX = 100
-  val nY = 100
-  val nT = 1000
+  val nX = 30
+  val nY = 30
+  val nT = 500
 
   //шаг по координатам
   val deltaX = a / (nX)
   val deltaY = d / (nY)
 
+  val beta = deltaX / deltaY
+
   //шаг по времени
-  val tau = 0.1
+  val tau = 0.001
 
   //какие-то параметры
   val rho = 1.0
@@ -32,7 +34,16 @@ object Common {
 
   var p = Map[Int, Map[(Int, Int), Double]]()
 
-  val init: Unit = {
+  val initVal = init
+
+  def init: Unit = {
+    //init for time
+    (1 to nT).foreach(t => {
+      u = u + (t -> Map())
+      v = v + (t -> Map())
+      p = p + (t -> Map())
+    })
+
     // t = 0
     (0 to 0).foreach(t => {
       var tempU = Map[(Int, Int), Double]()
@@ -40,21 +51,14 @@ object Common {
       var tempP = Map[(Int, Int), Double]()
       (0 to nY).foreach(y => {
         (0 to nX).foreach(x => {
-          tempU = tempU + ((x,y) -> fU(x, y, 0))
-          tempV = tempV + ((x,y) -> fV(x, y, 0))
-          tempP = tempP + ((x,y) -> fP(x, y, 0))
+          tempU = tempU + ((x, y) -> fU(x, y, 0))
+          tempV = tempV + ((x, y) -> fV(x, y, 0))
+          tempP = tempP + ((x, y) -> fP(x, y, 0))
         })
       })
       u = u + (0 -> tempU)
       v = v + (0 -> tempV)
       p = p + (0 -> tempP)
-    })
-
-    // init for time
-    (1 to nT).foreach(t => {
-      u = u + (t -> Map())
-      v = v + (t -> Map())
-      p = p + (t -> Map())
     })
 
     // x = 0, x = a
@@ -102,4 +106,27 @@ object Common {
 
   def fP(x: Int, y: Int, t: Int) =
     d / 2 * rho * exp(-t * tau) * exp(2 * y * deltaY / d) * cos(2 * x * deltaX / d)
+
+  def functionToGraph(v: Map[Int, Map[(Int, Int), Double]]):
+  (Map[Int, List[(Int, Int, Double)]], Map[Int, List[(Int, Int, Double)]]) = {
+    var graph1: Map[Int, List[(Int, Int, Double)]] = Map()
+    var graph2: Map[Int, List[(Int, Int, Double)]] = Map()
+    (0 to nT - 1).foreach(t => {
+      var list1: List[(Int, Int, Double)] = List()
+      var list2: List[(Int, Int, Double)] = List()
+      (0 to nY).foreach(y =>
+        (0 to nX).foreach(x =>
+          list1 = list1.::((x, y, v(t)(x, y)))
+        )
+      )
+      (0 to nX).foreach(x =>
+        (0 to nY).foreach(y =>
+          list2 = list2.::((x, y, v(t)(x, y)))
+        )
+      )
+      graph1 = graph1.+(t -> list1)
+      graph2 = graph2.+(t -> list2)
+    })
+    (graph1, graph2)
+  }
 }
